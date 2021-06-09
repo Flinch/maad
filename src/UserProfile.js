@@ -7,8 +7,8 @@ export default class UserProfile extends React.Component {
 	state = {
 		user: {
 			userName: "John F Dee",
-			userColor: "--",
-			userCakeDay: "--",
+			userColor: "",
+			userCakeDay: "",
 		},
 		isEdit: 0,
 		prevState: {},
@@ -42,7 +42,7 @@ export default class UserProfile extends React.Component {
 							placeholder={
 								type === "userCakeDay" ? "m/d/yyyy" : ""
 							}
-							type="text"
+							type={type === "userCakeDay" ? "date" : "text"}
 							class="form-control form-control-sm"
 							onChange={this.onInputChange(type)}
 							value={this.state.user[type]}
@@ -60,7 +60,17 @@ export default class UserProfile extends React.Component {
 	};
 
 	cakeDayCheck = () => {
-		if (this.state.user.userCakeDay === new Date().toLocaleDateString()) {
+		let userDate = new Date(this.state.user.userCakeDay);
+		let userMonth = userDate.getMonth() + 1;
+		let userDay = userDate.getDate() + 1;
+
+		let todayDate = new Date();
+		let month = todayDate.getMonth() + 1;
+		let day = todayDate.getDate();
+
+		console.log(userDay);
+
+		if (month === userMonth && day === userDay) {
 			this.setState({ celebrate: 1 });
 		}
 	};
