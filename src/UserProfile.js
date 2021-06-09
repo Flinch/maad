@@ -127,7 +127,7 @@ export default class UserProfile extends React.Component {
 									</div>
 									{this.state.isEdit ? (
 										<a
-											href=""
+											href="#"
 											onClick={this.onEditCancel}
 											class="small text-center"
 										>
