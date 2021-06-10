@@ -1,7 +1,7 @@
 import React from "react";
 import "./UserProfile.css";
 import Confetti from "react-confetti";
-import user from "./img/kingdom-329.png";
+import user from "../img/kingdom-329.png";
 
 export default class UserProfile extends React.Component {
 	state = {
@@ -40,7 +40,7 @@ export default class UserProfile extends React.Component {
 					<div className="form-group">
 						<input
 							placeholder={
-								type === "userCakeDay" ? "m/d/yyyy" : ""
+								type === "userCakeDay" ? "m/d/yyyy" : "color..."
 							}
 							type={type === "userCakeDay" ? "date" : "text"}
 							class="form-control form-control-sm"
@@ -68,8 +68,6 @@ export default class UserProfile extends React.Component {
 		let month = todayDate.getMonth() + 1;
 		let day = todayDate.getDate();
 
-		console.log(userDay);
-
 		if (month === userMonth && day === userDay) {
 			this.setState({ celebrate: 1 });
 		}
@@ -96,6 +94,7 @@ export default class UserProfile extends React.Component {
 						<div class="member-card pt-2 pb-2">
 							<div class="thumb-sm member-thumb mx-auto">
 								<img
+									data-testid="image"
 									src={user}
 									class=" img-thumbnail"
 									alt="profile-image"
@@ -103,12 +102,13 @@ export default class UserProfile extends React.Component {
 								/>
 							</div>
 							<div class="">
-								<h4 class="mt-2">
+								<h4 class="mt-2" data-testid="user-name">
 									{this.onEditMode("userName")}
 								</h4>
 							</div>
 
 							<button
+								data-testid="edit-button"
 								type="button"
 								class="btn-sm btn-primary remove-border mt-3 btn-rounded waves-effect w-md waves-light"
 								onClick={this.onEdit}
@@ -122,24 +122,32 @@ export default class UserProfile extends React.Component {
 							<div class="">
 								<div class="row">
 									<div class="col-6">
-										<div class="mt-3">
-											{this.onEditMode("userCakeDay")}
-											<p class="mb-0 text-muted">
+										<div class="mt-0">
+											<p
+												class="mb-0 text-muted"
+												data-testid="cake-day"
+											>
 												Cake Day
 											</p>
+											{this.onEditMode("userCakeDay")}
 										</div>
 									</div>
 									<div class="col-6">
-										<div class="mt-3">
+										<div class="mt-0">
+											<p
+												class="mb-0 text-muted"
+												data-testid="color"
+											>
+												Favorite Color{" "}
+											</p>
 											{this.onEditMode("userColor")}
-											<p class="mb-0 text-muted">Color</p>
 										</div>
 									</div>
 									{this.state.isEdit ? (
 										<a
 											href="#"
 											onClick={this.onEditCancel}
-											class="small text-center"
+											class="small text-center mt-2"
 										>
 											Clear Changes
 										</a>
